@@ -1,0 +1,40 @@
+<% include ../partials/header %>
+
+
+<div class="container mt-4">
+    <header class="jumbotron">
+        <div class="container">
+            <h1>Welcome to Climb Project</h1>
+            <p>View our hand-picked routes from Suesca</p>
+            <p>
+                <a class="btn btn-primary btn-lg" href="/campgrounds/new">Add New Route!</a>
+            </p>
+        </div>
+    </header> 
+
+    <div class="row">
+        <div class="col-12">
+            <h3>Our Most Popular Climb Projects</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <% campgrounds.forEach(function(campground){ %>
+            <div class="col-12 col-md-4">
+                <div class="card">
+                    <img class="card-img-top" src="<%= campground.image %>">
+                    <div class="card-body">
+                        <p class="card-text"> <%= campground.name%> </p> 
+                    </div>
+                    <p>
+                        <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary">More Info</a>
+                    </p>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+
+</div>
+
+
+<% include ../partials/footer %>

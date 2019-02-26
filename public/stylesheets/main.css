@@ -1,0 +1,19 @@
+.card img {
+    width: 100%;
+}
+
+.container{
+    margin-top: 2em;
+}
+
+.card-body{
+    padding: 0;
+}
+
+.card-text{
+    padding: 0 1em 1em 1em;
+}
+
+.card-subtitle{
+    padding: 0 1em 0 1em;
+}
