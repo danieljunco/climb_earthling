@@ -19,7 +19,8 @@ mongoose.connect("mongodb://localhost:27017/climb_camp", {useNewUrlParser: true}
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
-seedDB();
+
+// seedDB(); //Seed the database 
 
 // ========================
 // Passport Configuration 
