@@ -1,0 +1,28 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row d-inline">
+        <h1 style="text-align: center">Edit <%= route.name %> </h1>
+        <div  style="width: 30%; margin: 30px auto;">
+            <form action="/campgrounds/<%= route._id %>?_method=PUT" method="post">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="route[name]" value="<%= route.name %>">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="route[image]" value="<%= route.image %>">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="route[description]" value="<%= route.description %>">
+                </div>
+                <div class="form-group">
+                    <input class="btn btn-primary btn-lg btn-block" type="submit" value="Submit!">
+                </div>
+            </form>
+            <a href="/campgrounds">Go Back!</a>
+        </div>
+        
+    </div>
+</div>
+
+
+<% include ../partials/footer %>

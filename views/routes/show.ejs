@@ -14,14 +14,16 @@
             <div class="card">
                 <div class="card-body">
                     <img class="rounded img-fluid" src="<%= campground.image %>" alt="">
-                    <div class="d-flex justify-content-between card-subtitle my-2 text-muted">
+                    <div class="d-flex justify-content-between card-subtitle mt-2 text-muted">
                         <h4><a href=""><%= campground.name %></a></h4>
                         <h4>5.11a</h4>
                     </div>
                     <p class="card-text"><%= campground.description %></p>
-                    <p class="card-text">
-                        <em>Submitted By <%= campground.author.username</em> 
+                    <p class="card-text d-flex justify-content-between">
+                        <em>Submitted By <%= campground.author.username %></em> 
+                        <a class="btn btn-warning" href="/campgrounds/<%= campground._id %>/edit>">Edit</a>
                     </p>
+                    
                 </div>
                 <div class="card-footer text-muted">
                     <div class="text-right">
