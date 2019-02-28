@@ -115,7 +115,7 @@ function checkRouteOwnerShip(req, res, next){
             }
         });
     }else{
-        res.redirect("back")
+        res.redirect("back");
     }
 }
 
