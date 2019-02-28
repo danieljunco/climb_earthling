@@ -76,10 +76,24 @@ router.put("/:id", function(req, res){
         if(err){
             res.redirect("/campgrounds");
         } else{
+            //redirect somewhere 
             res.redirect("/campgrounds/" +req.params.id);
         }
     })
-    //redirect somewhere 
+    
+});
+
+//DESTROY Route route
+
+router.delete("/:id", function(req, res){
+    Campground.findOneAndDelete(req.params.id, function(err){
+        if(err){
+            res.redirect("/campgrounds");
+        }
+        else{
+            res.redirect("/campgrounds");
+        }
+    })
 });
 
 //middleware

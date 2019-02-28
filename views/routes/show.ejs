@@ -14,16 +14,21 @@
             <div class="card">
                 <div class="card-body">
                     <img class="rounded img-fluid" src="<%= campground.image %>" alt="">
-                    <div class="d-flex justify-content-between card-subtitle mt-2 text-muted">
+                    <div class="d-flex justify-content-between align-items-center card-subtitle mt-2 text-muted">
                         <h4><a href=""><%= campground.name %></a></h4>
                         <h4>5.11a</h4>
                     </div>
-                    <p class="card-text"><%= campground.description %></p>
-                    <p class="card-text d-flex justify-content-between">
-                        <em>Submitted By <%= campground.author.username %></em> 
-                        <a class="btn btn-warning" href="/campgrounds/<%= campground._id %>/edit>">Edit</a>
+                    <p class="card-text">
+                        <%= campground.description %>
+                        <em>Submitted By <%= campground.author.username %></em>
+                        <div class="card-text d-flex justify-content-end">
+                            <a class="btn btn-warning mr-2 btn-sm" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
+                            <form action="/campgrounds/<%= campground._id %>?_method=DELETE">
+                                <button class="btn btn-danger pr-2 btn-sm">Delete</button>
+                            </form> 
+                        </div>
                     </p>
-                    
+     
                 </div>
                 <div class="card-footer text-muted">
                     <div class="text-right">
