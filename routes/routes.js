@@ -49,10 +49,10 @@ router.post("/", middleware.isLoggedIn, function(req, res){
 router.get("/:id", function(req, res){
     //find the campground with provided ID
     Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
-        if(err){
-            console.log(err);
-        }
-        else{
+        if(err || !foundCampground){
+            req.flash("error", "Route not found");
+            res.redirect("back");
+        } else{
             //render show template with that campground
             res.render("routes/show",{campground: foundCampground});
         }
@@ -62,7 +62,12 @@ router.get("/:id", function(req, res){
 // EDIT Routes route
 router.get("/:id/edit", middleware.checkRouteOwnerShip, function(req, res){
     Campground.findById(req.params.id, function(err, foundRoute){
-        res.render("routes/edit", {route: foundRoute});
+        if(err || !foundRoute){
+            req.flash("error","The route doesn`t exist");
+            res.redirect("back"); 
+        } else {
+            res.render("routes/edit", {route: foundRoute});       
+        }
     });
 });
 
@@ -83,7 +88,8 @@ router.put("/:id", middleware.checkRouteOwnerShip, function(req, res){
 //DESTROY Route route
 router.delete("/:id", middleware.checkRouteOwnerShip, function(req, res){
     Campground.findById(req.params.id, function(err, route){
-        if(err){
+        if(err || !route){
+            req.flash("error","The route doesn`t exist");
             console.log(err);
         }
         else{

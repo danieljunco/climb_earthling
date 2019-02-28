@@ -22,7 +22,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
     //lookup campground using ID
     Campground.findById(req.params.id, function(err, campground){
         if(err){
-            console.log(err);
+            req.flash("error", "Something went wrong");
             res.redirect("/campgrounds");
         }else{
             //create new comment
@@ -38,6 +38,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
                     campground.comments.push(comment);
                     campground.save();
                     //redirect campground show page
+                    req.flash("success", "Successfully added");
                     res.redirect("/campgrounds/" + campground._id);
                 }
             });
@@ -47,22 +48,34 @@ router.post("/", middleware.isLoggedIn, function(req, res){
 
 //COMMENT EDIT Route
 router.get("/:comment_id/edit", middleware.checkCommentOwnerShip, function(req, res){
-    Comment.findById(req.params.comment_id, function(err, foundComment){
-        if(err){
-            res.redirect("back");
-        } else{
-            res.render("comments/edit", {route_id: req.params.id, comment: foundComment});
-        }
+    Campground.findById(req.params.id, function(err, foundRoute){
+        if(err || !foundRoute){
+            req.flash("error","No route found");
+            return res.redirect("back");
+        } 
+        Comment.findById(req.params.comment_id, function(err, foundComment){
+            if(err){
+                res.redirect("back");
+            } else{
+                res.render("comments/edit", {route_id: req.params.id, comment: foundComment});
+            }
+        });
     });
 });
 
 router.put("/:comment_id", middleware.checkCommentOwnerShip, function(req, res){
-    Comment.findOneAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
-        if(err){
-            res.redirect("back");
-        } else{
-            res.redirect("/campgrounds/" + req.params.id);
-        }
+    Campground.findById(req.params.id, function(err, foundRoute){
+        if(err || !foundRoute){
+            req.flash("error","No route found");
+            return res.redirect("back");
+        } 
+        Comment.findOneAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
+            if(err){
+                res.redirect("back");
+            } else{
+                res.redirect("/campgrounds/" + req.params.id);
+            }
+        });
     });
 });
 
@@ -82,6 +95,7 @@ router.delete("/:comment_id", middleware.checkCommentOwnerShip, function(req, re
                 if(err){
                     console.log(err);
                 } else{
+                    req.flash("success", "Comment deleted");
                     res.redirect("/campgrounds/" + req.params.id);
                 }
             });
