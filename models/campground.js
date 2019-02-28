@@ -1,4 +1,5 @@
 var mongoose     =       require("mongoose");
+var Comment      =       require("./comment");
 
 var climbgroundSchema = new mongoose.Schema({
     name: String,
@@ -17,6 +18,19 @@ var climbgroundSchema = new mongoose.Schema({
             ref: "Comment"
         }
     ]
+});
+
+climbgroundSchema.pre("remove", async function(next){
+    try{
+        await Comment.remove({
+            "_id": {
+                $in: this.comments
+            }
+        });
+        next();
+    } catch(err){
+        console.log(err);
+    }
 });
 
 module.exports = mongoose.model("Campground", climbgroundSchema);

@@ -17,3 +17,7 @@
 .card-subtitle{
     padding: 0 1em 0 1em;
 }
+
+#delete-form{
+    display: inline;
+}
