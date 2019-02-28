@@ -45,6 +45,7 @@
                                     <span>10 days ago</span>
                                 </div>
                                 <p> <%= comment.text %> </p>
+                                <a class="btn btn-warning btn-sm" href="/campgrounds/<%= campground._id %>/comments/<%= comment.id %>/edit">Edit</a>
                             </div>
                         </div>
                     <% }) %>
