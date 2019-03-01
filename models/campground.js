@@ -4,6 +4,7 @@ var Comment      =       require("./comment");
 var climbgroundSchema = new mongoose.Schema({
     name: String,
     image: String,
+    level: String,
     description: String,
     author:{
         id: {

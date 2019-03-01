@@ -7,11 +7,12 @@
         <title>ClimbProject</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="/stylesheets/main.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/java"></script>
     </head>
 
     <body>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar sticky-top navbar-dark bg-dark">
             <a class="navbar-brand" href="/">ClimbProject</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -39,17 +40,19 @@
         
             </div>
         </nav>
+        <% if(error && error.length >0){ %>
         <div class="container">
-            <% if(error && error.length >0){ %>
                 <div class="alert alert-danger" role="alert">
                         <%= error %>
                 </div>
+        </div>
             <% } %>
-            <% if(success && success.length >0){ %>
+        <% if(success && success.length >0){ %>
+        <div class="container"></div>
             <div class="alert alert-success role="alert">
                     <%= success %>
             </div>
-            <% } %>
         </div>
+        <% } %>
 
         
