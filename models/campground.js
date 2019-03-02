@@ -5,6 +5,9 @@ var climbgroundSchema = new mongoose.Schema({
     name: String,
     image: String,
     level: String,
+    location: String,
+    lat: Number,
+    lng: Number,
     description: String,
     author:{
         id: {
