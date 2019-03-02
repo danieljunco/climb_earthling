@@ -21,7 +21,7 @@
                     </div>
                     <p class="card-text">
                         <%= campground.description %>
-                        <em>Submitted By <%= campground.author.username %></em>
+                        <em>Submitted By <%= campground.author.username %>, <%= moment(campground.createdAt).fromNow() %></em>
                         <div class="card-text d-flex justify-content-end">
                             <% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
                                 <a class="btn btn-warning mr-2 btn-sm" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
@@ -43,7 +43,7 @@
                             <div class="col-md-12">
                                 <div class="d-flex justify-content-between">
                                     <strong><%= comment.author.username %></strong>
-                                    <span>10 days ago</span>
+                                    <span><%= moment(comment.createdAt).fromNow() %></span>
                                 </div>
                                 <p> <%= comment.text %> </p>
                                 <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
