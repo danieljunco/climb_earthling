@@ -23,7 +23,7 @@
                         <%= campground.description %>
                         <em>Submitted By <%= campground.author.username %>, <%= moment(campground.createdAt).fromNow() %></em>
                         <div class="card-text d-flex justify-content-end">
-                            <% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
+                            <% if((currentUser && campground.author.id.equals(currentUser._id)) || (currentUser && currentUser.isAdmin)){ %>
                                 <a class="btn btn-warning mr-2 btn-sm" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
                                 <form action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
                                     <button class="btn btn-danger pr-2 btn-sm">Delete</button>
@@ -46,7 +46,7 @@
                                     <span><%= moment(comment.createdAt).fromNow() %></span>
                                 </div>
                                 <p> <%= comment.text %> </p>
-                                <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                                <% if( (currentUser && comment.author.id.equals(currentUser._id)) || (currentUser && currentUser.isAdmin) ){ %>
                                     <a class="btn btn-warning btn-sm" href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit">Edit</a>
                                     <form id="delete-form" action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
                                         <button class="btn btn-danger btn-sm">Delete</button>
