@@ -111,3 +111,11 @@
   height: 400px;
   width: 100%;
 }
+
+#username-profile{
+  text-transform: capitalize;
+}
+
+.nav-link {
+  text-transform: capitalize;
+}

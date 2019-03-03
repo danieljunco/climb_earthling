@@ -2,6 +2,7 @@ var express     =   require("express");
 var router      =   express.Router();
 var passport    =   require("passport");
 var User        =   require("../models/user");
+var middleware      =   require("../middleware");
 
 //ROOT route
 
@@ -50,6 +51,41 @@ router.get("/logout", function(req, res){
     req.logout();
     req.flash("success", "Logged out");
     res.redirect("/campgrounds");
+});
+
+//USER profile
+router.get("/users/:id/edit", middleware.isLoggedIn, function(req, res){
+    User.findById(req.params.id, function(err, foundUser){
+        if(err){
+            req.flash("error", err.message);
+            res.redirect("back");
+        }
+        res.render("users/show", {user: foundUser});
+    });
+});
+
+router.put("/users/:id", middleware.isLoggedIn, function(req, res){
+    console.log(req.params.id);
+    User.update({_id:req.params.id}, {
+        $set:{
+            name: req.body.profile.name,
+            city: req.body.profile.city,
+            phone: req.body.profile.phone,
+            email: req.body.profile.email,
+            country: req.body.profile.country,
+            alias: req.body.profile.alias
+        }
+    }, function(err){
+        if(err){
+            req.flash("error", "Check your data");
+            res.redirect("back");
+        }
+        else{
+            req.flash("success", "Personal Information Updated");
+            res.redirect("/users/" + req.params.id + "/edit");
+            console.log(req.params.id);
+        }
+    });
 });
 
 

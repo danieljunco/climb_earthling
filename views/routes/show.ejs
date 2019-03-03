@@ -21,7 +21,7 @@
                     </div>
                     <p class="card-text">
                         <%= campground.description %>
-                        <em>Submitted By <%= campground.author.username %>, <%= moment(campground.createdAt).fromNow() %></em>
+                        <em>Submitted By <a href="/users/<%= campground.author.id %>" ><%= campground.author.username %></a>, <%= moment(campground.createdAt).fromNow() %></em>
                         <div class="card-text d-flex justify-content-end">
                             <% if((currentUser && campground.author.id.equals(currentUser._id)) || (currentUser && currentUser.isAdmin)){ %>
                                 <a class="btn btn-warning mr-2 btn-sm" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
